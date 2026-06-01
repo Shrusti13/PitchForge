@@ -153,7 +153,9 @@ PitchForge is grounded, not generative-guesswork:
 
 ```
 pitchforge/
-├── README.md                          # You are here
+├── README.md
+├── demo/
+│   └── PitchForgedemo.mp4             
 ├── assets/
 │   └── architecture.png               # Process / architecture diagram
 ├── skills/
