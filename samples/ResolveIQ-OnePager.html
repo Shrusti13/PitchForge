@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResolveIQ — AI-Powered IT Support Agent</title>
+<meta name="description" content="ResolveIQ: a low-code Copilot Studio agent that resolves IT support requests instantly or auto-creates prioritised tickets, delivered for a leading enterprise SaaS and cloud infrastructure provider.">
+<style>
+  :root{
+    --primary:#004672;
+    --secondary:#0078D4;
+    --accent:#00B7C3;
+    --dark:#1B1B1B;
+    --light:#F5F5F5;
+    --white:#FFFFFF;
+    --text:#333333;
+    --text-2:#6B6B6B;
+    --value:#107C10;
+    --primary-tint:#E6EEF3;
+    --accent-tint:#E0F7F9;
+    --radius:8px;
+    --shadow:0 2px 8px rgba(0,0,0,0.06);
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    color:var(--text);
+    background:var(--white);
+    line-height:1.6;
+    font-size:16px;
+  }
+  h1,h2,h3{font-family:inherit;margin:0;}
+  p{margin:0;}
+  a{color:var(--secondary);text-decoration:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding:64px 0;}
+  .section-light{background:var(--light);}
+  .section-white{background:var(--white);}
+  .eyebrow{
+    text-transform:uppercase;font-size:12px;font-weight:600;letter-spacing:.05em;
+    color:var(--accent);margin-bottom:8px;
+  }
+  h2.section-title{
+    font-size:28px;font-weight:600;color:var(--primary);line-height:1.25;
+    padding-bottom:12px;margin-bottom:24px;position:relative;
+  }
+  h2.section-title::after{
+    content:"";position:absolute;left:0;bottom:0;width:56px;height:3px;
+    background:var(--accent);border-radius:2px;
+  }
+  .lead{font-size:18px;color:var(--text);max-width:70ch;margin-bottom:32px;}
+
+  /* NAV */
+  nav.topnav{
+    position:sticky;top:0;z-index:100;background:var(--primary);
+    box-shadow:0 1px 6px rgba(0,0,0,0.18);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;padding:0 24px;
+    display:flex;align-items:center;justify-content:space-between;
+    min-height:56px;gap:16px;
+  }
+  .brand{
+    font-size:20px;font-weight:700;color:var(--white);white-space:nowrap;
+    letter-spacing:.01em;
+  }
+  .brand span{color:var(--accent);}
+  .nav-links{
+    display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;
+  }
+  .nav-links a{
+    color:#D6E4EE;font-size:14px;font-weight:500;padding:8px 12px;border-radius:6px;
+    white-space:nowrap;transition:background .15s,color .15s;
+  }
+  .nav-links a:hover{background:rgba(255,255,255,.12);color:var(--white);}
+  .nav-links a.active{color:var(--white);background:var(--secondary);}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(135deg,var(--primary) 0%,#003355 60%,var(--dark) 100%);
+    color:var(--white);padding:80px 0 72px;
+  }
+  .hero .wrap{max-width:var(--maxw);}
+  .hero-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
+  .badge{
+    display:inline-block;font-size:12px;font-weight:600;letter-spacing:.04em;
+    text-transform:uppercase;padding:6px 12px;border-radius:999px;
+  }
+  .badge-industry{background:var(--accent);color:#06303a;}
+  .badge-client{background:rgba(255,255,255,.14);color:var(--white);border:1px solid rgba(255,255,255,.25);}
+  .hero h1{
+    font-size:52px;font-weight:700;line-height:1.08;margin-bottom:16px;letter-spacing:-.5px;
+  }
+  .hero .tagline{font-size:22px;font-weight:400;color:#CFE3F2;max-width:60ch;}
+  .hero-metric{
+    margin-top:36px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  }
+  .hero-metric .big{font-size:48px;font-weight:700;color:var(--accent);line-height:1;}
+  .hero-metric .cap{font-size:16px;color:#CFE3F2;max-width:44ch;}
+
+  /* GRIDS */
+  .grid{display:grid;gap:24px;}
+  .grid-2{grid-template-columns:repeat(2,1fr);}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-4{grid-template-columns:repeat(4,1fr);}
+  .card{
+    background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:24px;
+  }
+  .section-white .card{background:var(--light);}
+  .card .ico{font-size:26px;line-height:1;margin-bottom:12px;display:block;}
+  .card h3{font-size:17px;font-weight:600;color:var(--primary);margin-bottom:6px;}
+  .card p{font-size:14.5px;color:var(--text);}
+
+  /* TECH */
+  .tech-group{margin-bottom:28px;}
+  .tech-group:last-child{margin-bottom:0;}
+  .tech-group h3{
+    font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--secondary);
+    font-weight:600;margin-bottom:14px;
+  }
+  .tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .tech-card{
+    background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:16px 18px;display:flex;gap:12px;align-items:flex-start;
+  }
+  .tech-card .ico{font-size:22px;line-height:1.1;}
+  .tech-card .t-name{font-size:15px;font-weight:600;color:var(--primary);display:block;margin-bottom:2px;}
+  .tech-card .t-role{font-size:13px;color:var(--text-2);}
+  .mono{font-family:"Cascadia Code","Consolas","SF Mono",monospace;}
+
+  /* ARCHITECTURE */
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin-bottom:32px;}
+  .stage{
+    flex:1 1 0;min-width:160px;background:var(--primary);color:var(--white);
+    border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow);
+  }
+  .stage:nth-child(4n+3){background:var(--secondary);}
+  .stage .s-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:24px;height:24px;border-radius:999px;background:rgba(255,255,255,.18);
+    font-size:12px;font-weight:700;margin-bottom:10px;
+  }
+  .stage h4{font-size:15px;font-weight:600;margin:0 0 6px;line-height:1.25;}
+  .stage p{font-size:13px;color:#DCEAF4;}
+  .connector{
+    flex:0 0 32px;display:flex;align-items:center;justify-content:center;
+    color:var(--accent);font-size:26px;font-weight:700;
+  }
+  .walkthrough{counter-reset:step;list-style:none;padding:0;margin:0;display:grid;gap:12px;}
+  .walkthrough li{
+    position:relative;padding:14px 16px 14px 52px;background:var(--white);
+    border-radius:var(--radius);box-shadow:var(--shadow);font-size:14.5px;
+  }
+  .walkthrough li::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;left:14px;top:50%;transform:translateY(-50%);
+    width:26px;height:26px;border-radius:999px;background:var(--accent-tint);
+    color:var(--primary);font-weight:700;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .walkthrough li strong{color:var(--primary);}
+
+  /* METRICS */
+  .metric-card{
+    background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:28px 24px;text-align:center;
+  }
+  .metric-card .num{font-size:44px;font-weight:700;color:var(--value);line-height:1;margin-bottom:8px;}
+  .metric-card .mlabel{font-size:15px;font-weight:600;color:var(--primary);margin-bottom:6px;}
+  .metric-card .mctx{font-size:13.5px;color:var(--text-2);}
+
+  /* OUTCOMES */
+  .outcome-panel{
+    background:var(--accent-tint);border-radius:var(--radius);
+    padding:32px;border-left:4px solid var(--accent);
+  }
+  .outcome-panel p{font-size:17px;margin-bottom:16px;}
+  .outcome-panel p:last-child{margin-bottom:0;}
+  .outcome-panel strong{color:var(--primary);}
+
+  /* CONTRIBUTORS */
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .person{text-align:center;}
+  .avatar{
+    width:64px;height:64px;border-radius:999px;background:var(--primary);color:var(--white);
+    display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;
+    margin:0 auto 12px;
+  }
+  .person .p-name{font-size:16px;font-weight:600;color:var(--text);margin-bottom:2px;}
+  .person .p-role{font-size:13.5px;color:var(--text-2);}
+
+  /* FOOTER */
+  footer{background:var(--dark);color:#C9C9C9;padding:40px 0;}
+  footer .f-brand{font-size:18px;font-weight:700;color:var(--white);margin-bottom:6px;}
+  footer .f-brand span{color:var(--accent);}
+  footer .f-tag{font-size:14px;color:#A8A8A8;margin-bottom:16px;}
+  footer .f-meta{font-size:12.5px;color:#8A8A8A;}
+
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px;}
+
+  @media (max-width:900px){
+    .grid-3,.grid-4,.tech-grid,.team-grid{grid-template-columns:repeat(2,1fr);}
+    .hero h1{font-size:40px;}
+    .flow{flex-direction:column;}
+    .connector{flex:0 0 28px;transform:rotate(90deg);}
+  }
+  @media (max-width:560px){
+    .grid-2,.grid-3,.grid-4,.tech-grid,.team-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:32px;}
+    .hero .tagline{font-size:18px;}
+    section{padding:48px 0;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Top navigation -->
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="brand">Resolve<span>IQ</span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#challenge">Challenge</a>
+      <a href="#solution">Solution</a>
+      <a href="#technology">Technology</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#impact">Impact</a>
+      <a href="#outcomes">Outcomes</a>
+      <a href="#team">Team</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-badges">
+      <span class="badge badge-industry">Enterprise SaaS &amp; Cloud Infrastructure</span>
+      <span class="badge badge-client">Client anonymised</span>
+    </div>
+    <h1>ResolveIQ</h1>
+    <p class="tagline">An AI-powered IT support agent that resolves issues in chat — or files the ticket for you.</p>
+    <div class="hero-metric">
+      <span class="big">55%</span>
+      <span class="cap">of issues resolved at first contact through self-service — no ticket required.</span>
+    </div>
+  </div>
+</header>
+
+<!-- Challenge -->
+<section class="section-light" id="challenge">
+  <div class="wrap">
+    <p class="eyebrow">The Challenge</p>
+    <h2 class="section-title">Why this mattered</h2>
+    <p class="lead">Internal IT support at a leading enterprise SaaS and cloud infrastructure provider was stretched thin. A complex service portal and manual ticketing kept employees waiting and support staff buried in routine work.</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <span class="ico" aria-hidden="true">😣</span>
+        <h3>Portal fatigue</h3>
+        <p>Employees avoided the complex service portal, flooding the helpdesk with unstructured emails and Teams messages instead.</p>
+      </div>
+      <div class="card">
+        <span class="ico" aria-hidden="true">⏱️</span>
+        <h3>Slow ticket creation</h3>
+        <p>Support staff spent 40% of their time manually logging, categorising, and assigning tickets rather than resolving them.</p>
+      </div>
+      <div class="card">
+        <span class="ico" aria-hidden="true">📚</span>
+        <h3>Knowledge base underused</h3>
+        <p>Over 2,000 KB articles sat unused — employees raised tickets even for simple password resets and VPN fixes.</p>
+      </div>
+      <div class="card">
+        <span class="ico" aria-hidden="true">🎯</span>
+        <h3>Inconsistent prioritisation</h3>
+        <p>Priority was assigned subjectively, so critical issues sat in the queue behind routine requests.</p>
+      </div>
+      <div class="card">
+        <span class="ico" aria-hidden="true">🌙</span>
+        <h3>No after-hours support</h3>
+        <p>Support ran 9-to-6, leaving employees in other time zones with no self-service option for common issues.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Solution Overview -->
+<section class="section-white" id="solution">
+  <div class="wrap">
+    <p class="eyebrow">The Solution</p>
+    <h2 class="section-title">What we built</h2>
+    <p class="lead">ResolveIQ is a fully low-code Copilot Studio agent — the first point of contact for every internal IT request. Employees describe their issue in plain language in Teams; ResolveIQ either resolves it instantly from the knowledge base or creates a prioritised ticket and routes it to the right team automatically. No portal hopping, no manual logging, no queues.</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <span class="ico" aria-hidden="true">💬</span>
+        <h3>Natural-language intake</h3>
+        <p>Employees just describe the problem in Teams chat — no forms, no portal, no ticket fields to fill in.</p>
+      </div>
+      <div class="card">
+        <span class="ico" aria-hidden="true">⚡</span>
+        <h3>Instant self-service</h3>
+        <p>Pulls answers from the ServiceNow knowledge base to resolve common issues on the spot, without a ticket.</p>
+      </div>
+      <div class="card">
+        <span class="ico" aria-hidden="true">🎫</span>
+        <h3>Automatic ticketing</h3>
+        <p>When a ticket is needed, ResolveIQ creates it, sets priority, and assigns the right support team — automatically.</p>
+      </div>
+      <div class="card">
+        <span class="ico" aria-hidden="true">📊</span>
+        <h3>Rule-based prioritisation</h3>
+        <p>Consistent priority and SLA-based escalation replace subjective, case-by-case judgment.</p>
+      </div>
+      <div class="card">
+        <span class="ico" aria-hidden="true">🌍</span>
+        <h3>Always on</h3>
+        <p>24/7 self-service means employees in any time zone get help the moment they need it.</p>
+      </div>
+      <div class="card">
+        <span class="ico" aria-hidden="true">🛠️</span>
+        <h3>Owned by IT ops</h3>
+        <p>Fully low-code — the IT operations team maintains and extends it with no developer dependency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Technology -->
+<section class="section-light" id="technology">
+  <div class="wrap">
+    <p class="eyebrow">Built With</p>
+    <h2 class="section-title">Technology stack</h2>
+    <p class="lead">A low-code agent on Microsoft Copilot Studio, wired into ServiceNow and Power Automate — turning a Teams conversation into either an instant answer or a fully-routed ticket. No custom code was deployed.</p>
+
+    <div class="tech-group">
+      <h3>AI &amp; Intelligence</h3>
+      <div class="tech-grid">
+        <div class="tech-card">
+          <span class="ico" aria-hidden="true">🤖</span>
+          <div><span class="t-name mono">Copilot Studio</span><span class="t-role">Low-code agent builder — interprets requests and decides the path. No custom code.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <h3>Integration &amp; Connectivity</h3>
+      <div class="tech-grid">
+        <div class="tech-card">
+          <span class="ico" aria-hidden="true">🔌</span>
+          <div><span class="t-name mono">ServiceNow Connector</span><span class="t-role">Creates, updates, assigns, and tracks tickets via the Power Platform connector.</span></div>
+        </div>
+        <div class="tech-card">
+          <span class="ico" aria-hidden="true">📖</span>
+          <div><span class="t-name mono">ServiceNow KB Integration</span><span class="t-role">Retrieves knowledge-base articles so common issues resolve without a ticket.</span></div>
+        </div>
+        <div class="tech-card">
+          <span class="ico" aria-hidden="true">🔄</span>
+          <div><span class="t-name mono">Power Automate</span><span class="t-role">Cloud flows for ticket routing, priority rules, and SLA-based escalation.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <h3>Interface</h3>
+      <div class="tech-grid">
+        <div class="tech-card">
+          <span class="ico" aria-hidden="true">💼</span>
+          <div><span class="t-name mono">Microsoft Teams</span><span class="t-role">The primary interface — employees chat with ResolveIQ where they already work.</span></div>
+        </div>
+        <div class="tech-card">
+          <span class="ico" aria-hidden="true">🪪</span>
+          <div><span class="t-name mono">Adaptive Cards</span><span class="t-role">Rich cards for ticket confirmation, status updates, and KB article display in Teams.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <h3>Data &amp; Storage</h3>
+      <div class="tech-grid">
+        <div class="tech-card">
+          <span class="ico" aria-hidden="true">🗄️</span>
+          <div><span class="t-name mono">Dataverse</span><span class="t-role">Logs conversation history, ticket metadata, and resolution analytics.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Architecture -->
+<section class="section-white" id="architecture">
+  <div class="wrap">
+    <p class="eyebrow">How It Works</p>
+    <h2 class="section-title">Solution architecture</h2>
+    <p class="lead">A single conversation in Teams flows through the agent to either an instant answer or a prioritised, auto-routed ticket — with everything logged for analytics.</p>
+
+    <div class="flow" role="list" aria-label="Solution architecture flow">
+      <div class="stage" role="listitem">
+        <span class="s-num">1</span>
+        <h4>Teams request</h4>
+        <p>Employee describes the issue in natural language.</p>
+      </div>
+      <div class="connector" aria-hidden="true">→</div>
+      <div class="stage" role="listitem">
+        <span class="s-num">2</span>
+        <h4>ResolveIQ agent</h4>
+        <p>Copilot Studio interprets intent and decides the path.</p>
+      </div>
+      <div class="connector" aria-hidden="true">→</div>
+      <div class="stage" role="listitem">
+        <span class="s-num">3</span>
+        <h4>Resolve or route</h4>
+        <p>KB self-service answer, or create a prioritised ticket.</p>
+      </div>
+      <div class="connector" aria-hidden="true">→</div>
+      <div class="stage" role="listitem">
+        <span class="s-num">4</span>
+        <h4>ServiceNow + Power Automate</h4>
+        <p>Ticket creation, rule-based priority, and SLA escalation.</p>
+      </div>
+      <div class="connector" aria-hidden="true">→</div>
+      <div class="stage" role="listitem">
+        <span class="s-num">5</span>
+        <h4>Confirm &amp; log</h4>
+        <p>Adaptive Card in Teams; Dataverse records history and analytics.</p>
+      </div>
+    </div>
+
+    <ol class="walkthrough">
+      <li><strong>Capture</strong> — An employee types their problem into the ResolveIQ chat in Microsoft Teams.</li>
+      <li><strong>Interpret</strong> — The Copilot Studio agent reads the request and determines whether it can be self-served.</li>
+      <li><strong>Branch</strong> — For known issues, ResolveIQ returns a ServiceNow KB article instantly; otherwise it raises a ticket.</li>
+      <li><strong>Orchestrate</strong> — Power Automate applies routing logic, sets priority by rule, and assigns the correct support team, with SLA-based escalation.</li>
+      <li><strong>Confirm &amp; record</strong> — An Adaptive Card confirms the outcome in Teams while Dataverse logs the conversation, ticket metadata, and analytics.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- Impact -->
+<section class="section-light" id="impact">
+  <div class="wrap">
+    <p class="eyebrow">The Impact</p>
+    <h2 class="section-title">Value delivered</h2>
+    <p class="lead">Measurable gains for both employees and the support operations team.</p>
+    <div class="grid grid-4">
+      <div class="metric-card">
+        <div class="num">55%</div>
+        <div class="mlabel">First-contact resolution</div>
+        <div class="mctx">Issues solved via KB self-service — with no ticket created.</div>
+      </div>
+      <div class="metric-card">
+        <div class="num">80%</div>
+        <div class="mlabel">Less manual logging</div>
+        <div class="mctx">Reduction in time support staff spend logging tickets.</div>
+      </div>
+      <div class="metric-card">
+        <div class="num">3x</div>
+        <div class="mlabel">Faster assignment</div>
+        <div class="mctx">Average ticket assignment from 45 minutes to under 15.</div>
+      </div>
+      <div class="metric-card">
+        <div class="num">100%</div>
+        <div class="mlabel">Consistent priority</div>
+        <div class="mctx">Rule-based logic replaces subjective judgment.</div>
+      </div>
+    </div>
+    <div class="grid grid-4" style="margin-top:24px;">
+      <div class="metric-card">
+        <div class="num">24/7</div>
+        <div class="mlabel">Self-service availability</div>
+        <div class="mctx">Employees in every time zone get help anytime.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Outcomes -->
+<section class="section-white" id="outcomes">
+  <div class="wrap">
+    <p class="eyebrow">Outcomes &amp; What's Next</p>
+    <h2 class="section-title">Results in eight weeks</h2>
+    <div class="outcome-panel">
+      <p>Within <strong>8 weeks</strong> of deployment, the IT support team cut average resolution time by <strong>40%</strong> and saw a <strong>60% drop</strong> in "how do I…" tickets. Support operations now focus on complex incidents instead of routine requests.</p>
+      <p>The solution is fully low-code — maintained and extended by the IT ops team with no developer dependency. The same pattern is now being expanded to <strong>HR and Facilities</strong> support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="section-light" id="team">
+  <div class="wrap">
+    <p class="eyebrow">The Team Behind This</p>
+    <h2 class="section-title">Contributors</h2>
+    <div class="team-grid">
+      <div class="person">
+        <div class="avatar" aria-hidden="true">SS</div>
+        <div class="p-name">Shrushti Shah</div>
+        <div class="p-role">Senior Consultant &amp; Solution Architect</div>
+      </div>
+      <div class="person">
+        <div class="avatar" aria-hidden="true">AM</div>
+        <div class="p-name">Aarav Mehta</div>
+        <div class="p-role">Power Platform Developer</div>
+      </div>
+      <div class="person">
+        <div class="avatar" aria-hidden="true">PK</div>
+        <div class="p-name">Priya Kulkarni</div>
+        <div class="p-role">ServiceNow Integration Specialist</div>
+      </div>
+      <div class="person">
+        <div class="avatar" aria-hidden="true">RD</div>
+        <div class="p-name">Rohan Deshmukh</div>
+        <div class="p-role">IT Operations Lead (Client)</div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:32px;margin-bottom:0;font-size:15px;color:var(--text-2);">Delivery timeline: 8-week delivery, February – March 2026.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="f-brand">Resolve<span>IQ</span></div>
+    <div class="f-tag">AI-powered IT support — resolve in chat, or auto-file the ticket.</div>
+    <div class="f-meta">2026 &nbsp;·&nbsp; Confidential — For Pre-Sales Use Only</div>
+  </div>
+</footer>
+
+<script>
+  // Active-section highlight in the nav
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+    var map = {};
+    links.forEach(function(l){
+      var id = l.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if(sec){ map[id] = l; }
+    });
+    var sections = Object.keys(map).map(function(id){ return document.getElementById(id); });
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(l){ l.classList.remove('active'); });
+          var active = map[e.target.id];
+          if(active){ active.classList.add('active'); }
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+    sections.forEach(function(s){ obs.observe(s); });
+  })();
+</script>
+
+</body>
+</html>

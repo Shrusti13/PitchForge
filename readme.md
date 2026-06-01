@@ -168,9 +168,12 @@ pitchforge/
 
 A complete, working sample is included so anyone can reproduce the result:
 
-1. Open [`samples/resolveiq-sample-brief.md`](samples/resolveiq-sample-brief.md)
-   and copy the prompt + brief.
-2. Paste it into **Copilot Cowork** (with the two skills installed).
+1. **Create the two skills in Copilot Cowork** by uploading each `SKILL.md`:
+   - [`skills/presales-brandkit/SKILL.md`](skills/presales-brandkit/SKILL.md)
+   - [`skills/presales-one-pager/SKILL.md`](skills/presales-one-pager/SKILL.md)
+2. **Type the prompt** — open
+   [`samples/resolveiq-sample-brief.md`](samples/resolveiq-sample-brief.md),
+   copy the prompt + brief, and paste it into Copilot Cowork.
 3. Cowork generates a one-pager website identical in style to the included
    sample: [`samples/ResolveIQ-OnePager.html`](samples/ResolveIQ-OnePager.html).
 4. Open the generated HTML in any browser to preview, then deploy it (below).
@@ -182,10 +185,11 @@ A complete, working sample is included so anyone can reproduce the result:
 ## 🚀 Getting Started
 
 **Prerequisites**
+- **Microsoft 365 Copilot with a Frontier license** — required to access
+  Copilot Cowork.
 - Access to **Copilot Cowork** in your Microsoft 365 tenant.
-- The two skills installed in your personal Cowork skills folder
-  (`presales-brandkit` and `presales-one-pager`) — copy the folders from
-  [`/skills`](skills) into your Cowork skills location.
+- The two skills created in Cowork by uploading their `SKILL.md` files from
+  [`/skills`](skills) (see [Try It Yourself](#-try-it-yourself)).
 
 **Generate a one-pager**
 1. In Cowork, invoke both skills and describe your solution (use
@@ -195,21 +199,8 @@ A complete, working sample is included so anyone can reproduce the result:
 
 ## ☁️ Deploy to Azure Static Web Apps
 
-Because the output is a single self-contained HTML file, hosting is trivial.
-
-**Option A — Azure Portal**
-1. Put the generated HTML in a repo, renamed `index.html` (or add a small
-   `staticwebapp.config.json` to set the entry point).
-2. In the Azure Portal: **Create resource → Static Web App**.
-3. Connect this GitHub repo, set **App location** to the folder holding the
-   HTML, leave **API location** blank, and create.
-4. Azure provisions a CI/CD workflow and gives you a public `*.azurestaticapps.net`
-   URL to share. `[Add your deployed URL]`
-
-**Option B — Azure CLI (SWA)**
-```bash
-npm install -g @azure/static-web-apps-cli
-swa deploy ./samples --app-name pitchforge --env production
+Deploy the generated HTML as an **Azure Static Web App** to get a shareable
+live link. `[Add your deployed URL]`
 ```
 
 > Tip: rename the one-pager to `index.html` so it loads as the site root.
